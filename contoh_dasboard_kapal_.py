@@ -51,7 +51,7 @@ if 'login' not in st.session_state:
 
 if not st.session_state.login:
     # Ganti link ini dengan gambar latar belakang favoritmu (harus direct image URL)
-    background_url = "ttps://i.imgur.com/le5W3tY.jpeg"
+    background_url = "https://i.imgur.com/le5W3tY.jpeg"
 
     # CSS Styling
     st.markdown(f"""
