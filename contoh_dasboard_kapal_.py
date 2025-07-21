@@ -152,7 +152,7 @@ if not st.session_state.login:
             <p>
                 Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar, dan kepatuhan operasional dari satu dashboard terintegrasi.
             </p>
-            <img src="https://i.imgur.com/le5W3tY.jpeg" />
+            <img src="https://i.imgur.com/qvRiXgs.jpeg" />
         </div>
     """, unsafe_allow_html=True)
 
