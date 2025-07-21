@@ -45,14 +45,63 @@ df_dummy.to_csv("dummy_kapal_data_100.csv", index=False)
 
 import streamlit as st
 
-# ------------------ LOGIN ------------------
+# ------------------ LOGIN PAGE STYLING ------------------
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
-    st.image("https://yourimageurl.com/logo.png", width=200)
-    st.title("📦 Dashboard Monitoring Barang Kapal")
-    st.subheader("Pelabuhan Tanjung Priok")
+    # CSS Styling
+    st.markdown("""
+        <style>
+            .login-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                background-color: #e6f0ff;
+                padding: 20px;
+            }
+            .login-box {
+                background-color: white;
+                padding: 40px;
+                border-radius: 15px;
+                box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+                width: 400px;
+            }
+            .login-title {
+                font-size: 28px;
+                font-weight: bold;
+                color: #1a75ff;
+                margin-bottom: 10px;
+                text-align: center;
+            }
+            .carousel {
+                width: 100%;
+                height: 180px;
+                overflow-x: scroll;
+                white-space: nowrap;
+            }
+            .carousel img {
+                height: 160px;
+                margin: 0 8px;
+                border-radius: 8px;
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Gambar Carousel
+    st.markdown("""
+        <div class="carousel">
+            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2" />
+            <img src="https://images.unsplash.com/photo-1583430174890-6c5c32a1cc9e" />
+            <img src="https://images.unsplash.com/photo-1618925693387-6ef13eec63f4" />
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Kotak Login
+    st.markdown('<div class="login-container"><div class="login-box">', unsafe_allow_html=True)
+    st.markdown('<div class="login-title">📦 Login Dashboard Kapal</div>', unsafe_allow_html=True)
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
@@ -60,13 +109,15 @@ if not st.session_state.login:
     if st.button("Login"):
         if username == "admin" and password == "123":
             st.session_state.login = True
+            st.rerun()
         else:
-            st.error("Username atau Password salah!")
+            st.error("Username atau password salah.")
 
-    st.markdown("---")
-    st.caption("© 2025 Stance Works x Pelindo")
+    st.markdown('</div></div>', unsafe_allow_html=True)
     st.stop()
-
+if page == "Beranda":
+    st.image("https://images.unsplash.com/photo-1505842465776-3d90f6160b9c", use_column_width=True)
+    st.markdown("### 👋 Selamat Datang di Dashboard Monitoring Barang Kapal")
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
