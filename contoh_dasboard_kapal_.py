@@ -49,147 +49,183 @@ import streamlit as st
 import random
 
 import streamlit as st
-import random
+# Pustaka 'random' tidak lagi diperlukan karena CAPTCHA dibuat statis sesuai gambar
+# import random
 
-# Fungsi captcha acak
+# Fungsi Captcha disesuaikan agar sesuai dengan gambar
 def generate_captcha():
-    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z', '7', 'L'], 6))
+    # Mengembalikan nilai statis seperti yang terlihat di gambar
+    return 'A B 3 X 9 Z'
 
-# Simpan status login
+# Inisialisasi sesi login
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
-    # CSS styling responsif dan modern
     st.markdown("""
         <style>
-            * {
-                font-family: 'Segoe UI', sans-serif;
+            /* Menghapus margin default dari Streamlit */
+            .main .block-container {
+                padding-top: 0rem;
+                padding-bottom: 0rem;
             }
             .container {
                 display: flex;
-                flex-direction: row;
                 height: 100vh;
-                width: 100vw;
                 overflow: hidden;
+                font-family: 'Segoe UI', sans-serif;
+                background-color: #f0f2f5;
             }
-            .left {
-                background-color: #0a2e5c;
-                color: white;
+            .left-panel {
                 flex: 1;
-                padding: 80px 50px;
+                /* Menggunakan warna biru tua solid seperti di gambar */
+                background-color: #0d253f; 
+                color: white;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+                align-items: center; /* Memusatkan konten */
+                padding: 50px;
+                text-align: center; /* Memusatkan teks */
             }
-            .left h1 {
-                font-size: 42px;
+            .left-panel h1 {
+                font-size: 48px; /* Ukuran font lebih besar */
                 font-weight: bold;
-                margin-bottom: 10px;
+                margin-bottom: 5px; /* Mengurangi jarak bawah */
+                color: #ffffff;
+                line-height: 1.2;
+                letter-spacing: 2px;
+            }
+            .left-panel h2 {
+                font-size: 24px;
+                font-weight: 300; /* Font lebih tipis */
+                margin-bottom: 20px;
                 color: #ffffff;
             }
-            .left h3 {
-                font-size: 20px;
-                font-weight: normal;
+            .left-panel p {
+                font-size: 16px;
+                color: #d6ecff;
                 line-height: 1.6;
-                max-width: 400px;
-                color: #cce4ff;
+                max-width: 450px; /* Sedikit lebih sempit */
+                margin-bottom: 40px; /* Menambah jarak ke gambar */
             }
-            .kapal {
-                margin-top: 50px;
-                width: 100%;
-                max-width: 400px;
+            .left-panel img.main-img {
+                /* Menggunakan ilustrasi kapal dari gambar */
+                width: 70%; 
+                max-width: 300px;
+                margin-top: 20px;
             }
-            .right {
+            .right-panel {
                 flex: 1;
-                background-color: #f9fcff;
+                background-color: #ffffff;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                padding: 50px;
             }
             .login-box {
-                background: white;
+                background-color: #ffffff;
                 padding: 40px;
-                border-radius: 12px;
-                box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
                 width: 100%;
                 max-width: 400px;
             }
             .login-box h2 {
-                text-align: center;
                 margin-bottom: 25px;
-                font-size: 24px;
-                color: #0a2e5c;
+                text-align: left; /* Teks ke kiri */
+                font-size: 28px;
+                color: #0d253f; /* Warna biru tua */
+                font-weight: 600;
             }
             .captcha-box {
-                background-color: #fff0d9;
-                padding: 10px 20px;
-                font-size: 20px;
+                background-color: #fffbe6; /* Kuning pucat */
+                padding: 12px 20px;
                 font-weight: bold;
-                color: #b36b00;
+                font-size: 20px;
+                letter-spacing: 8px; /* Jarak huruf lebih besar */
+                color: #d4ac0d; /* Warna gold/kuning tua */
                 border-radius: 8px;
+                margin-bottom: 15px;
+                display: block; /* Agar lebar penuh */
                 text-align: center;
-                margin-bottom: 10px;
-                letter-spacing: 6px;
+                border: 1px solid #f7eac3;
             }
-            .small-links {
-                margin-top: 20px;
-                text-align: center;
-                font-size: 13px;
-                color: #444;
+            .small-text {
+                font-size: 14px;
+                margin-top: 15px;
+                text-align: left; /* Teks ke kiri */
+                color: #555;
             }
-            .small-links a {
-                color: #0066cc;
+            .small-text a {
+                color: #0073e6;
                 text-decoration: none;
-                font-weight: 500;
+                font-weight: 600;
+            }
+            /* Menghilangkan animasi kapal yang tidak ada di gambar */
+            .ocean, .ship, .wave {
+                display: none;
             }
         </style>
     """, unsafe_allow_html=True)
 
-    # Struktur HTML utama: dua sisi kiri-kanan
+    # Struktur halaman
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Bagian kiri (judul dan kapal)
+    # Panel Kiri - Konten disesuaikan dengan gambar
     st.markdown("""
-        <div class="left">
-            <h1>SMARTSHIP<br>EVALUASI KAPAL</h1>
-            <h3>Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.</h3>
-            <img src="https://i.imgur.com/qvRiXgs.jpeg" class="kapal" alt="kapal"/>
+        <div class="left-panel">
+            <h1>SMARTSHIP</h1>
+            <h2>EVALUASI KAPAL</h2>
+            <p>
+                Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini unt tuk performa kapal Anda.
+            </p>
+            <img src="https://i.imgur.com/gK6aJIc.png" class="main-img" alt="Ilustrasi Kapal"/>
         </div>
     """, unsafe_allow_html=True)
+    
+    # Panel Kanan
+    col1, col2 = st.columns([1,1])
+    with col2:
+        st.markdown('<div class="login-box">', unsafe_allow_html=True)
+        st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
-    # Bagian kanan (form login)
-    st.markdown('<div class="right"><div class="login-box">', unsafe_allow_html=True)
-    st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
+        username = st.text_input("Username", label_visibility="collapsed", placeholder="Username")
+        password = st.text_input("Password", type="password", label_visibility="collapsed", placeholder="Password")
 
-    username = st.text_input("Username", key="username")
-    password = st.text_input("Password", type="password", key="password")
+        # Menggunakan fungsi captcha yang sudah disesuaikan
+        captcha_text = generate_captcha()
+        st.markdown(f'<div class="captcha-box">{captcha_text}</div>', unsafe_allow_html=True)
+        user_captcha = st.text_input("Captcha", label_visibility="collapsed", placeholder="Captcha")
 
-    captcha = generate_captcha()
-    st.markdown(f'<div class="captcha-box">{captcha}</div>', unsafe_allow_html=True)
-    user_captcha = st.text_input("Captcha", key="captcha_input")
+        if st.button("Sign In", use_container_width=True):
+            # Logika login disesuaikan dengan captcha statis
+            # .replace(" ", "") untuk menghapus spasi dari input dan teks captcha
+            if username == "admin" and password == "123" and user_captcha.replace(" ", "").upper() == captcha_text.replace(" ", ""):
+                st.session_state.login = True
+                st.rerun()
+            else:
+                st.error("Login gagal: Username / Password / Captcha salah.")
 
-    if st.button("Sign In"):
-        if username == "admin" and password == "123" and user_captcha.replace(" ", "") == captcha.replace(" ", ""):
-            st.session_state.login = True
-            st.rerun()
-        else:
-            st.error("Login gagal: Username, Password, atau Captcha salah.")
+        st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
+        st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-    st.markdown("""
-        <div class="small-links">
-            Don’t have an account? <a href="#">Sign Up Here</a><br>
-            Forgot Password? <a href="#">Click Here</a>
-        </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('</div></div></div>', unsafe_allow_html=True)
+        st.markdown('</div>', unsafe_allow_html=True)
+        
+    st.markdown('</div>', unsafe_allow_html=True) # Penutup container
     st.stop()
 
-# Setelah login berhasil
-st.success("✅ Login berhasil. Selamat datang di SmartShip Dashboard!")
-st.markdown("📊 Dashboard akan ditampilkan di sini...")
 
+# --- Halaman Setelah Berhasil Login ---
+st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
+st.markdown("📊 Di sini akan muncul dashboard utama...")
+
+# Contoh konten dashboard
+st.header("Dashboard Utama")
+st.write("Analisis Performa Kapal Anda.")
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Total Armada", "12 Kapal", "2")
+col2.metric("Efisiensi Bahan Bakar", "85%", "-1.2%")
+col3.metric("Kepatuhan Rute", "98%", "0.5%")
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
 st.sidebar.title("Navigasi")
