@@ -50,26 +50,62 @@ import random
 
 import streamlit as st
 import random
+import base64
 
-# Generate dummy captcha
+# Fungsi captcha generator
 def generate_captcha():
     return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z'], 5))
 
+# Fungsi untuk konversi gambar ke base64
+def get_base64_of_bin_file(bin_file_path):
+    with open(bin_file_path, 'rb') as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+# Muat gambar kapal animasi (lokal)
+kapal_path = '84f21291-9dfe-4466-b228-8ce570b764c1.png'  # pastikan file ini ada di folder yang sama
+kapal_base64 = get_base64_of_bin_file(kapal_path)
+
+# Login session
 if 'login' not in st.session_state:
     st.session_state.login = False
 
+# Jika belum login
 if not st.session_state.login:
-    # CSS styling modernized
-    st.markdown("""
+
+    # CSS style lengkap
+    st.markdown(f"""
         <style>
-            .container {
-                display: flex;
-                height: 100vh;
-                overflow: hidden;
+            html, body, [class*="css"] {{
+                margin: 0;
+                padding: 0;
                 font-family: 'Segoe UI', sans-serif;
+            }}
+            .hero-container {{
+                height: 250px;
+                background-color: #eaf6fc;
+                position: relative;
+                overflow: hidden;
+            }}
+            .ship {{
+                position: absolute;
+                bottom: 0;
+                left: -300px;
+                width: 220px;
+                animation: moveShip 18s linear infinite;
+                opacity: 0.9;
+            }}
+            @keyframes moveShip {{
+                0% {{ left: -300px; }}
+                100% {{ left: 100%; }}
+            }}
+            .container {{
+                display: flex;
+                height: calc(100vh - 250px);
+                overflow: hidden;
                 background-color: #e9f4fb;
-            }
-            .left-panel {
+            }}
+            .left-panel {{
                 flex: 1;
                 background: linear-gradient(to bottom right, #004080, #0073e6);
                 color: white;
@@ -77,47 +113,47 @@ if not st.session_state.login:
                 flex-direction: column;
                 justify-content: center;
                 padding: 50px;
-            }
-            .left-panel h1 {
+            }}
+            .left-panel h1 {{
                 font-size: 38px;
                 font-weight: bold;
                 margin-bottom: 15px;
                 color: #ffffff;
-            }
-            .left-panel p {
+            }}
+            .left-panel p {{
                 font-size: 17px;
                 color: #d6ecff;
                 line-height: 1.5;
                 max-width: 500px;
-            }
-            .left-panel img {
+            }}
+            .left-panel img {{
                 width: 80%;
                 margin-top: 40px;
                 border-radius: 15px;
                 box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            }
-            .right-panel {
+            }}
+            .right-panel {{
                 flex: 1;
                 background-color: #fefefe;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 padding: 50px;
-            }
-            .login-box {
+            }}
+            .login-box {{
                 background-color: #ffffff;
                 padding: 40px;
                 border-radius: 12px;
                 box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
                 width: 100%;
                 max-width: 400px;
-            }
-            .login-box h2 {
+            }}
+            .login-box h2 {{
                 margin-bottom: 20px;
                 text-align: center;
                 color: #003366;
-            }
-            .captcha-box {
+            }}
+            .captcha-box {{
                 background-color: #fff7e6;
                 padding: 10px 20px;
                 font-weight: bold;
@@ -127,36 +163,43 @@ if not st.session_state.login:
                 border-radius: 8px;
                 margin-bottom: 10px;
                 display: inline-block;
-            }
-            .small-text {
+            }}
+            .small-text {{
                 font-size: 13px;
                 margin-top: 10px;
                 text-align: center;
                 color: #444;
-            }
-            .small-text a {
+            }}
+            .small-text a {{
                 color: #0073e6;
                 text-decoration: none;
                 font-weight: 500;
-            }
+            }}
         </style>
     """, unsafe_allow_html=True)
 
-    # Layout container
+    # Header animasi kapal
+    st.markdown(f"""
+        <div class="hero-container">
+            <img class="ship" src="data:image/png;base64,{kapal_base64}" />
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Kontainer utama
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Panel Kiri (judul dan gambar)
+    # Panel kiri
     st.markdown(f"""
         <div class="left-panel">
             <h1>SmartShip Evaluation System</h1>
             <p>
                 Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar, dan kepatuhan operasional dari satu dashboard terintegrasi.
             </p>
-            <img src="https://i.imgur.com/qvRiXgs.jpeg" />
+            <img src="https://i.imgur.com/le5W3tY.jpeg" />
         </div>
     """, unsafe_allow_html=True)
 
-    # Panel Kanan (form login)
+    # Panel kanan
     st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
     st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
@@ -177,8 +220,12 @@ if not st.session_state.login:
     st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
     st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup container
+    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Tutup panel kanan dan container
     st.stop()
+
+# Jika sudah login
+st.success("Login berhasil. Selamat datang di Dashboard!")
+
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
