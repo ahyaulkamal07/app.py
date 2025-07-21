@@ -49,276 +49,178 @@ import streamlit as st
 import random
 
 import streamlit as st
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - [Nama Perusahaan Anda]</title>
-    <style>
-        /* Import Font dari Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+import random
 
-        /* --- CSS Reset & Global Style --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+# Fungsi Captcha
+def generate_captcha():
+    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z'], 5))
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            overflow: hidden;
-        }
+# Inisialisasi sesi login
+if 'login' not in st.session_state:
+    st.session_state.login = False
 
-        /* --- Main Container --- */
-        .login-container {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            max-width: 1200px;
-            max-height: 700px;
-            background: #fff;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        /* --- Panel Kiri (Visual) --- */
-        .left-panel {
-            flex: 1;
-            background-image: url('https://images.unsplash.com/photo-1577561145218-e794399d5f85?q=80&w=1887&auto=format&fit=crop'); /* <-- GANTI GAMBAR DI SINI */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 50px;
-            color: #fff;
-        }
-        
-        /* Overlay gelap agar teks terbaca */
-        .left-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0, 35, 75, 0.8), rgba(0, 35, 75, 0.2));
-        }
-
-        .left-panel .welcome-text {
-            position: relative; /* Agar di atas overlay */
-            z-index: 1;
-        }
-
-        .left-panel h1 {
-            font-size: 2.5rem;
-            line-height: 1.2;
-            margin-bottom: 10px;
-        }
-
-        .left-panel p {
-            font-size: 1rem;
-            max-width: 400px;
-        }
-
-        /* --- Panel Kanan (Formulir) --- */
-        .right-panel {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-        }
-
-        .login-form {
-            width: 100%;
-            max-width: 380px;
-            text-align: center;
-        }
-        
-        .login-form .logo {
-            width: 150px;
-            margin-bottom: 20px;
-        }
-
-        .login-form h2 {
-            font-size: 1.8rem;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .login-form .subtitle {
-            color: #777;
-            margin-bottom: 30px;
-        }
-        
-        /* Styling untuk input field dan floating label */
-        .form-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            background: #f9f9f9;
-            transition: border-color 0.3s;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: #0056b3; /* Warna biru korporat */
-        }
-        
-        .form-label {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            color: #999;
-            pointer-events: none;
-            transition: all 0.3s ease;
-        }
-
-        /* Efek floating label saat input di-fokus atau diisi */
-        .form-input:focus + .form-label,
-        .form-input:not(:placeholder-shown) + .form-label {
-            top: 0px;
-            left: 10px;
-            font-size: 0.75rem;
-            color: #0056b3;
-            background: #fff;
-            padding: 0 5px;
-            transform: translateY(-50%);
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            background: #0056b3; /* Warna biru korporat */
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .login-button:hover {
-            background: #003d82; /* Warna biru lebih gelap saat hover */
-        }
-        
-        .forgot-password {
-            margin-top: 20px;
-            font-size: 0.9rem;
-        }
-
-        .forgot-password a {
-            color: #0056b3;
-            text-decoration: none;
-            transition: text-decoration 0.3s;
-        }
-
-        .forgot-password a:hover {
-            text-decoration: underline;
-        }
-
-        /* --- Media Query untuk Tampilan Mobile --- */
-        @media (max-width: 800px) {
+if not st.session_state.login:
+    st.markdown("""
+        <style>
+            .container {
+                display: flex;
+                height: 100vh;
+                overflow: hidden;
+                font-family: 'Segoe UI', sans-serif;
+                background-color: #e9f4fb;
+            }
             .left-panel {
-                display: none; /* Sembunyikan panel gambar di mobile */
+                flex: 1;
+                background: linear-gradient(to bottom right, #004080, #0073e6);
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 50px;
+                position: relative;
+            }
+            .left-panel h1 {
+                font-size: 38px;
+                font-weight: bold;
+                margin-bottom: 15px;
+                color: #ffffff;
+            }
+            .left-panel p {
+                font-size: 17px;
+                color: #d6ecff;
+                line-height: 1.5;
+                max-width: 500px;
+            }
+            .left-panel img.main-img {
+                width: 80%;
+                margin-top: 40px;
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             }
             .right-panel {
-                flex-basis: 100%;
+                flex: 1;
+                background-color: #fefefe;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 50px;
             }
-            .login-container {
-                border-radius: 0;
-                box-shadow: none;
-                max-height: 100%;
+            .login-box {
+                background-color: #ffffff;
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
             }
-        }
+            .login-box h2 {
+                margin-bottom: 20px;
+                text-align: center;
+                color: #003366;
+            }
+            .captcha-box {
+                background-color: #fff7e6;
+                padding: 10px 20px;
+                font-weight: bold;
+                font-size: 18px;
+                letter-spacing: 5px;
+                color: #e09000;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+            .small-text {
+                font-size: 13px;
+                margin-top: 10px;
+                text-align: center;
+                color: #444;
+            }
+            .small-text a {
+                color: #0073e6;
+                text-decoration: none;
+                font-weight: 500;
+            }
 
-    </style>
-</head>
-<body>
-    
-    <div class="login-container">
+            /* ANIMASI KAPAL */
+            .ocean {
+                height: 120px;
+                width: 100%;
+                background: #aee4f6;
+                overflow: hidden;
+                position: absolute;
+                top: 10px;
+                left: 0;
+                border-radius: 12px;
+            }
+            .wave {
+                background: url('https://i.imgur.com/axQ9wDY.png') repeat-x;
+                position: absolute;
+                top: 70px;
+                width: 200%;
+                height: 50px;
+                animation: wave 10s linear infinite;
+                opacity: 0.8;
+            }
+            @keyframes wave {
+                0% { background-position-x: 0; }
+                100% { background-position-x: -1600px; }
+            }
+            .ship {
+                position: absolute;
+                top: 10px;
+                left: 0;
+                width: 100px;
+                animation: sail 25s linear infinite;
+            }
+            @keyframes sail {
+                0% { left: -150px; }
+                100% { left: 100%; }
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Struktur halaman
+    st.markdown('<div class="container">', unsafe_allow_html=True)
+
+    st.markdown(f"""
         <div class="left-panel">
-            <div class="welcome-text">
-                <h1>Gerbang Digital Anda</h1>
-                <p>Mengintegrasikan layanan logistik dan maritim terdepan untuk efisiensi bisnis Anda.</p>
+            <div class="ocean">
+                <div class="wave"></div>
+                <img src="https://imgur.com/OyBhpR9.png" class="ship" />
             </div>
+            <h1>SmartShip Evaluation System</h1>
+            <p>
+                Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar,
+                dan kepatuhan operasional dari satu dashboard terintegrasi.
+            </p>
+            <img src="https://imgur.com/OyBhpR9.png" class="main-img" alt="kapal"/>
         </div>
+    """, unsafe_allow_html=True)
 
-        <div class="right-panel">
-            <form class="login-form" action="#" method="POST">
-                
-                <img src="https://pelindo.co.id/themes/pelindo/assets/images/logo/logo-pelindo-white.png" alt="Logo Perusahaan" class="logo" style="filter: invert(25%) sepia(50%) saturate(2500%) hue-rotate(190deg);">
+    st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
+    st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
-                <h2>Selamat Datang</h2>
-                <p class="subtitle">Silakan masuk ke akun Anda</p>
-                
-                <div class="form-group">
-                    <input type="text" id="username" class="form-input" placeholder=" " required>
-                    <label for="username" class="form-label">Username</label>
-                </div>
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
 
-                <div class="form-group">
-                    <input type="password" id="password" class="form-input" placeholder=" " required>
-                    <label for="password" class="form-label">Password</label>
-                </div>
-                
-                <button type="submit" class="login-button">Login</button>
+    captcha = generate_captcha()
+    st.markdown(f'<div class="captcha-box">{captcha}</div>', unsafe_allow_html=True)
+    user_captcha = st.text_input("Captcha")
 
-                <div class="forgot-password">
-                    <a href="#">Lupa Password?</a>
-                </div>
+    if st.button("Sign In"):
+        if username == "admin" and password == "123" and user_captcha.replace(" ", "") == captcha.replace(" ", ""):
+            st.session_state.login = True
+            st.rerun()
+        else:
+            st.error("Login gagal: Username / Password / Captcha salah.")
 
-            </form>
-        </div>
-    </div>
+    st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
+    st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-    <script>
-        // Sedikit Javascript untuk mencegah form submit (hanya untuk demo)
-        const form = document.querySelector('.login-form');
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Mencegah halaman reload
-            
-            // Di sini Anda akan menambahkan logika validasi atau pengiriman data ke server
-            alert("Tombol Login ditekan! (Aksi default dicegah untuk demo)");
+    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup container
+    st.stop()
 
-            // Contoh: Mengambil nilai input
-            const username = document.getElementById('username').value;
-            console.log(`Percobaan login dengan username: ${username}`);
-            
-            // Setelah login berhasil, arahkan ke halaman dashboard
-            // window.location.href = '/dashboard.html';
-        });
-
-        // Trik agar floating label bekerja di semua browser, bahkan saat autocomplete
-        // dengan memastikan input tidak memiliki placeholder yang terlihat.
-        document.querySelectorAll('.form-input').forEach(input => {
-            input.setAttribute('placeholder', ' ');
-        });
-    </script>
-
-</body>
-</html>
-
-# --- Halaman Setelah Berhasil Login ---
+# Jika berhasil login
 st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
 st.markdown("📊 Di sini akan muncul dashboard utama...")
 
