@@ -51,150 +51,144 @@ import random
 import streamlit as st
 import random
 
-# Fungsi Captcha
+# Fungsi captcha acak
 def generate_captcha():
-    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z', 'x', 'z'], 5))
+    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z', '7', 'L'], 6))
 
-# Inisialisasi login
+# Simpan status login
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
-    st.set_page_config(page_title="SmartShip Login", layout="wide")
-
+    # CSS styling responsif dan modern
     st.markdown("""
         <style>
-            html, body, [class*="css"]  {
+            * {
                 font-family: 'Segoe UI', sans-serif;
             }
             .container {
                 display: flex;
+                flex-direction: row;
                 height: 100vh;
+                width: 100vw;
                 overflow: hidden;
             }
             .left {
-                flex: 1;
-                background-color: #0b2c4c;
+                background-color: #0a2e5c;
                 color: white;
+                flex: 1;
+                padding: 80px 50px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                padding: 60px;
-                position: relative;
             }
             .left h1 {
-                font-size: 40px;
+                font-size: 42px;
                 font-weight: bold;
                 margin-bottom: 10px;
+                color: #ffffff;
             }
-            .left p {
-                font-size: 16px;
+            .left h3 {
+                font-size: 20px;
+                font-weight: normal;
                 line-height: 1.6;
-                color: #d6e4f5;
                 max-width: 400px;
+                color: #cce4ff;
             }
-            .left img {
-                width: 320px;
-                position: absolute;
-                bottom: 30px;
-                left: 60px;
+            .kapal {
+                margin-top: 50px;
+                width: 100%;
+                max-width: 400px;
             }
             .right {
                 flex: 1;
-                background-color: #f9fbfc;
+                background-color: #f9fcff;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 50px;
             }
             .login-box {
-                width: 100%;
-                max-width: 400px;
-                background-color: #ffffff;
+                background: white;
                 padding: 40px;
                 border-radius: 12px;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+                box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
             }
             .login-box h2 {
                 text-align: center;
                 margin-bottom: 25px;
-                color: #0b2c4c;
+                font-size: 24px;
+                color: #0a2e5c;
             }
             .captcha-box {
-                background-color: #fae6c8;
-                color: #a86700;
-                font-weight: bold;
-                letter-spacing: 5px;
+                background-color: #fff0d9;
                 padding: 10px 20px;
-                border-radius: 6px;
+                font-size: 20px;
+                font-weight: bold;
+                color: #b36b00;
+                border-radius: 8px;
                 text-align: center;
                 margin-bottom: 10px;
-                font-size: 20px;
+                letter-spacing: 6px;
             }
-            .small-text {
-                font-size: 13px;
+            .small-links {
+                margin-top: 20px;
                 text-align: center;
-                margin-top: 10px;
-                color: #333;
+                font-size: 13px;
+                color: #444;
             }
-            .small-text a {
-                color: #0073e6;
+            .small-links a {
+                color: #0066cc;
                 text-decoration: none;
                 font-weight: 500;
-            }
-            .login-button {
-                background-color: #0b2c4c;
-                color: white;
-                padding: 10px;
-                border: none;
-                border-radius: 6px;
-                width: 100%;
-                font-weight: bold;
-                margin-top: 10px;
             }
         </style>
     """, unsafe_allow_html=True)
 
+    # Struktur HTML utama: dua sisi kiri-kanan
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Kolom Kiri
-    st.markdown('''
+    # Bagian kiri (judul dan kapal)
+    st.markdown("""
         <div class="left">
-            <h1>SMARTSHIP<br/>EVALUASI KAPAL</h1>
-            <p>Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.</p>
-            <img src="https://i.imgur.com/OyBhpR9.png" alt="kapal">
+            <h1>SMARTSHIP<br>EVALUASI KAPAL</h1>
+            <h3>Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.</h3>
+            <img src="https://i.imgur.com/qvRiXgs.jpeg" class="kapal" alt="kapal"/>
         </div>
-    ''', unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    # Kolom Kanan - Form Login
+    # Bagian kanan (form login)
     st.markdown('<div class="right"><div class="login-box">', unsafe_allow_html=True)
-
     st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
-    username = st.text_input("Username", placeholder="Enter your username")
-    password = st.text_input("Password", type="password", placeholder="Enter your password")
+    username = st.text_input("Username", key="username")
+    password = st.text_input("Password", type="password", key="password")
 
     captcha = generate_captcha()
     st.markdown(f'<div class="captcha-box">{captcha}</div>', unsafe_allow_html=True)
-    user_captcha = st.text_input("Captcha", placeholder="Input the characters above")
+    user_captcha = st.text_input("Captcha", key="captcha_input")
 
-    if st.button("Sign In", key="login_btn"):
+    if st.button("Sign In"):
         if username == "admin" and password == "123" and user_captcha.replace(" ", "") == captcha.replace(" ", ""):
             st.session_state.login = True
             st.rerun()
         else:
-            st.error("Login gagal: Username / Password / Captcha salah.")
+            st.error("Login gagal: Username, Password, atau Captcha salah.")
 
-    st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
-    st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
+    st.markdown("""
+        <div class="small-links">
+            Don’t have an account? <a href="#">Sign Up Here</a><br>
+            Forgot Password? <a href="#">Click Here</a>
+        </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Tutup login-box, right, container
+    st.markdown('</div></div></div>', unsafe_allow_html=True)
     st.stop()
 
-# Jika login berhasil
-st.success("\u2705 Login berhasil! Selamat datang di SmartShip Dashboard.")
-st.markdown("\ud83d\udd0d Di sini kamu bisa mulai memantau performa kapal dengan visualisasi data yang interaktif.")
-
+# Setelah login berhasil
+st.success("✅ Login berhasil. Selamat datang di SmartShip Dashboard!")
+st.markdown("📊 Dashboard akan ditampilkan di sini...")
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
