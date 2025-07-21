@@ -43,18 +43,30 @@ df_dummy.to_csv("dummy_kapal_data_100.csv", index=False)
 
 
 
-# --------- LOGIN SECTION ---------
-name, authentication_status, username = authenticator.login("Login", "main")
+import streamlit as st
 
-if authentication_status == False:
-    st.error("Username atau password salah.")
-if authentication_status == None:
-    st.warning("Masukkan username dan password untuk masuk.")
-if authentication_status:
-    authenticator.logout("Logout", "sidebar")
-    st.sidebar.success(f"Login sebagai {name}")
-    st.title("📊 Dashboard Monitoring Kapal")
-    st.write("Selamat datang di dashboard kapal!")
+# ------------------ LOGIN ------------------
+if 'login' not in st.session_state:
+    st.session_state.login = False
+
+if not st.session_state.login:
+    st.image("https://yourimageurl.com/logo.png", width=200)
+    st.title("📦 Dashboard Monitoring Barang Kapal")
+    st.subheader("Pelabuhan Tanjung Priok")
+
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if username == "admin" and password == "123":
+            st.session_state.login = True
+        else:
+            st.error("Username atau Password salah!")
+
+    st.markdown("---")
+    st.caption("© 2025 Stance Works x Pelindo")
+    st.stop()
+
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
