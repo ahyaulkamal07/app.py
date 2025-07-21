@@ -45,86 +45,127 @@ df_dummy.to_csv("dummy_kapal_data_100.csv", index=False)
 
 import streamlit as st
 
-# ------------------ LOGIN PAGE STYLING ------------------
+import streamlit as st
+import random
+
+# Simulasi Captcha (bukan sistem aman, hanya dummy visual)
+def generate_captcha():
+    return ' '.join(random.sample(['F', '6', 'a', 'm', 'T'], 5))
+
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
-    # Ganti link ini dengan gambar latar belakang favoritmu (harus direct image URL)
-    background_url = "https://i.imgur.com/le5W3tY.jpeg"
-
-    # CSS Styling
-    st.markdown(f"""
+    # CSS
+    st.markdown("""
         <style>
-            .login-container {{
+            .container {
+                display: flex;
+                height: 100vh;
+                overflow: hidden;
+                font-family: 'Segoe UI', sans-serif;
+            }
+            .left-panel {
+                flex: 1;
+                background-color: #1B6CC9;
+                color: white;
                 display: flex;
                 flex-direction: column;
-                align-items: center;
                 justify-content: center;
-                height: 100vh;
-                background-image: url('{background_url}');
-                background-size: cover;
-                background-position: center;
-                padding: 20px;
-            }}
-            .login-box {{
-                background-color: rgba(255, 255, 255, 0.9);
+                align-items: center;
+                padding: 40px;
+            }
+            .left-panel h1 {
+                font-size: 40px;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+            .left-panel h1 span {
+                color: #00E6E6;
+            }
+            .right-panel {
+                flex: 1;
+                background: #f7f9fc;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 40px;
+            }
+            .login-box {
+                background-color: white;
                 padding: 40px;
                 border-radius: 15px;
-                box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
-                width: 400px;
-                text-align: center;
-            }}
-            .login-title {{
-                font-size: 28px;
-                font-weight: bold;
-                color: #003366;
-                margin-bottom: 20px;
-            }}
-            .carousel {{
                 width: 100%;
-                height: 180px;
-                overflow-x: scroll;
-                white-space: nowrap;
+                max-width: 400px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+            .login-box h2 {
                 margin-bottom: 20px;
-            }}
-            .carousel img {{
-                height: 160px;
-                margin: 0 8px;
+                text-align: center;
+                color: #003366;
+            }
+            .captcha-box {
+                background-color: #fff7e6;
+                padding: 10px 20px;
+                font-weight: bold;
+                font-size: 18px;
+                letter-spacing: 5px;
+                color: #e09000;
                 border-radius: 8px;
-            }}
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+            .small-text {
+                font-size: 13px;
+                margin-top: 10px;
+                text-align: center;
+            }
+            .small-text a {
+                color: #007BFF;
+                text-decoration: none;
+                font-weight: 500;
+            }
+            .image-ship {
+                margin-top: 30px;
+                width: 80%;
+                max-width: 400px;
+            }
         </style>
     """, unsafe_allow_html=True)
 
-    # Mulai login layout
-    st.markdown('<div class="login-container">', unsafe_allow_html=True)
+    # Layout dua kolom custom pakai HTML
+    st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Carousel Gambar (scrollable)
-    st.markdown("""
-        <div class="carousel">
-            <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2" />
-            <img src="https://i.imgur.com/le5W3tY.jpeg" />
-            <img src="https://images.unsplash.com/photo-1618925693387-6ef13eec63f4" />
+    # KIRI - Info dan Gambar
+    st.markdown('''
+        <div class="left-panel">
+            <h1>Transforming Operation <span>Excellence</span></h1>
+            <img class="image-ship" src="https://i.ibb.co/0cV5rVq/ship.png" />
         </div>
-    """, unsafe_allow_html=True)
+    ''', unsafe_allow_html=True)
 
-    # Kotak Login
-    st.markdown('<div class="login-box">', unsafe_allow_html=True)
-    st.markdown('<div class="login-title">📦 Login Dashboard Kapal</div>', unsafe_allow_html=True)
+    # KANAN - Form login
+    st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
+    st.markdown('<h2>PHINNISI Login</h2>', unsafe_allow_html=True)
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
 
-    if st.button("Login"):
-        if username == "admin" and password == "123":
+    captcha = generate_captcha()
+    st.markdown(f'<div class="captcha-box">{captcha}</div>', unsafe_allow_html=True)
+    user_captcha = st.text_input("Captcha")
+
+    if st.button("Sign In"):
+        if username == "admin" and password == "123" and user_captcha.replace(" ", "") == captcha.replace(" ", ""):
             st.session_state.login = True
             st.rerun()
         else:
-            st.error("Username atau password salah.")
+            st.error("Login gagal: Username / Password / Captcha salah.")
 
-    st.markdown('</div>', unsafe_allow_html=True)  # End login-box
-    st.markdown('</div>', unsafe_allow_html=True)  # End login-container
+    st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
+    st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
+    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Tutup login-box, right-panel, dan container
     st.stop()
 
 
