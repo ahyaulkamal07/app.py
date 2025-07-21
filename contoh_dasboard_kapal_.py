@@ -63,7 +63,7 @@ def get_base64_of_bin_file(bin_file_path):
     return base64.b64encode(data).decode()
 
 # Muat gambar kapal animasi (lokal)
-kapal_path = '84f21291-9dfe-4466-b228-8ce570b764c1.png'  # pastikan file ini ada di folder yang sama
+kapal_path = 'https://i.imgur.com/qvRiXgs.jpeg'  # pastikan file ini ada di folder yang sama
 kapal_base64 = get_base64_of_bin_file(kapal_path)
 
 # Login session
