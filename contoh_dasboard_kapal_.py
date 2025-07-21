@@ -42,27 +42,54 @@ df_dummy = pd.DataFrame(data, columns=[
 df_dummy.to_csv("dummy_kapal_data_100.csv", index=False)
 
 
-# ------------------ LOGIN ------------------
-if 'login' not in st.session_state:
-    st.session_state.login = False
+import streamlit as st
+import streamlit_authenticator as stauth
+import yaml
+from yaml.loader import SafeLoader
 
-if not st.session_state.login:
-    st.image("https://yourimageurl.com/logo.png", width=200)
-    st.title("📦 Dashboard Monitoring Barang Kapal")
-    st.subheader("Pelabuhan Tanjung Priok")
+# --------- CONFIG USERS ---------
+config = {
+    'credentials': {
+        'usernames': {
+            'admin': {
+                'name': 'Admin Pelabuhan',
+                'password': stauth.Hasher(['admin123']).generate()[0]
+            },
+            'user1': {
+                'name': 'Petugas 1',
+                'password': stauth.Hasher(['kapal2025']).generate()[0]
+            },
+        }
+    },
+    'cookie': {
+        'name': 'kapal_session',
+        'key': 'random_signature_key',
+        'expiry_days': 1
+    },
+    'preauthorized': {
+        'emails': []
+    }
+}
 
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
+authenticator = stauth.Authenticate(
+    config['credentials'],
+    config['cookie']['name'],
+    config['cookie']['key'],
+    config['cookie']['expiry_days']
+)
 
-    if st.button("Login"):
-        if username == "admin" and password == "123":
-            st.session_state.login = True
-        else:
-            st.error("Username atau Password salah!")
+# --------- LOGIN SECTION ---------
+name, authentication_status, username = authenticator.login("Login", "main")
 
-    st.markdown("---")
-    st.caption("© 2025 Stance Works x Pelindo")
-    st.stop()
+if authentication_status == False:
+    st.error("Username atau password salah.")
+if authentication_status == None:
+    st.warning("Masukkan username dan password untuk masuk.")
+if authentication_status:
+    authenticator.logout("Logout", "sidebar")
+    st.sidebar.success(f"Login sebagai {name}")
+    st.title("📊 Dashboard Monitoring Kapal")
+    st.write("Selamat datang di dashboard kapal!")
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
