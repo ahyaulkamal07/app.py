@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1HHLIQ98KHit4gQcvzUpSbor20-LfzC7G
 """
 
- import pandas as pd
+import pandas as pd
 import streamlit as st
 import plotly.express as px
 from datetime import datetime, timedelta
