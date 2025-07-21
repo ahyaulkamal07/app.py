@@ -75,27 +75,9 @@ if not st.session_state.login:
                 color: white;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                padding: 50px;
+                justify-content: space-between;
+                padding: 50px 40px;
                 position: relative;
-            }
-            .left-panel h1 {
-                font-size: 38px;
-                font-weight: bold;
-                margin-bottom: 15px;
-                color: #ffffff;
-            }
-            .left-panel p {
-                font-size: 17px;
-                color: #d6ecff;
-                line-height: 1.5;
-                max-width: 500px;
-            }
-            .left-panel img.main-img {
-                width: 80%;
-                margin-top: 40px;
-                border-radius: 15px;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             }
             .right-panel {
                 flex: 1;
@@ -147,10 +129,9 @@ if not st.session_state.login:
                 width: 100%;
                 background: #aee4f6;
                 overflow: hidden;
-                position: absolute;
-                top: 10px;
-                left: 0;
+                position: relative;
                 border-radius: 12px;
+                margin-bottom: 30px;
             }
             .wave {
                 background: url('https://i.imgur.com/axQ9wDY.png') repeat-x;
@@ -167,7 +148,7 @@ if not st.session_state.login:
             }
             .ship {
                 position: absolute;
-                top: 10px;
+                top: -20px;
                 left: 0;
                 width: 300px;
                 animation: sail 10s linear infinite;
@@ -176,27 +157,52 @@ if not st.session_state.login:
                 0% { left: -150px; }
                 100% { left: 100%; }
             }
+
+            .intro-text {
+                font-size: 17px;
+                color: #d6ecff;
+                line-height: 1.6;
+                margin-top: 20px;
+                max-width: 500px;
+            }
+
+            .left-title {
+                font-size: 36px;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #ffffff;
+            }
+            .left-subtitle {
+                font-size: 22px;
+                font-weight: 500;
+                margin-bottom: 20px;
+                color: #cce4ff;
+            }
+
         </style>
     """, unsafe_allow_html=True)
 
     # Struktur halaman
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
+    # LEFT PANEL
     st.markdown(f"""
         <div class="left-panel">
-            <div class="ocean">
-                <div class="wave"></div>
-                <img src="https://imgur.com/OyBhpR9.png" class="ship" />
+            <div>
+                <div class="ocean">
+                    <div class="wave"></div>
+                    <img src="https://imgur.com/OyBhpR9.png" class="ship" />
+                </div>
+                <div class="left-title">SMARTSHIP</div>
+                <div class="left-subtitle">EVALUASI KAPAL</div>
+                <p class="intro-text">
+                    Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.
+                </p>
             </div>
-            <h1>SmartShip Evaluation System</h1>
-            <p>
-                Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar,
-                dan kepatuhan operasional dari satu dashboard terintegrasi.
-            </p>
-            <img src="https://imgur.com/OyBhpR9.png" class="main-img" alt="kapal"/>
         </div>
     """, unsafe_allow_html=True)
 
+    # RIGHT PANEL (LOGIN FORM)
     st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
     st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
@@ -223,6 +229,7 @@ if not st.session_state.login:
 # Jika berhasil login
 st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
 st.markdown("📊 Di sini akan muncul dashboard utama...")
+
 
 # Contoh konten dashboard
 st.header("Dashboard Utama")
