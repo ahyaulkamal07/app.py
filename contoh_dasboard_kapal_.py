@@ -51,125 +51,182 @@ import random
 import streamlit as st
 import random
 
-# Fungsi untuk generate captcha
+# Fungsi Captcha
 def generate_captcha():
-    characters = ['A', 'B', '3', 'X', '9', 'Z', 'z']
-    return ' '.join(random.sample(characters, 5))
+    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z'], 5))
 
-# Setup session state
-if 'captcha' not in st.session_state:
-    st.session_state.captcha = generate_captcha()
+# Inisialisasi sesi login
 if 'login' not in st.session_state:
     st.session_state.login = False
 
-# CSS Styling
-st.markdown("""
-    <style>
-    .container {
-        display: flex;
-        flex-direction: row;
-        height: 100vh;
-        font-family: 'Arial', sans-serif;
-    }
-    .left-panel {
-        flex: 1;
-        background-color: #0b2447;
-        color: white;
-        padding: 5% 8%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .left-panel h1 {
-        font-size: 3em;
-        font-weight: bold;
-        margin-bottom: 0.2em;
-    }
-    .left-panel h2 {
-        font-size: 1.5em;
-        margin-bottom: 1em;
-        letter-spacing: 1px;
-    }
-    .left-panel p {
-        font-size: 1.1em;
-        line-height: 1.5;
-    }
-    .right-panel {
-        flex: 1;
-        background-color: #f9fcff;
-        padding: 5% 8%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-    .captcha-box {
-        background-color: #f6e8cd;
-        padding: 10px 20px;
-        border-radius: 8px;
-        display: inline-block;
-        font-weight: bold;
-        font-size: 1.2em;
-        margin-bottom: 10px;
-    }
-    input {
-        margin-bottom: 10px;
-    }
-    .bottom-links {
-        margin-top: 15px;
-        font-size: 0.9em;
-    }
-    .bottom-links a {
-        color: #004aad;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    </style>
-""", unsafe_allow_html=True)
+if not st.session_state.login:
+    st.markdown("""
+        <style>
+            .container {
+                display: flex;
+                height: 100vh;
+                overflow: hidden;
+                font-family: 'Segoe UI', sans-serif;
+                background-color: #e9f4fb;
+            }
+            .left-panel {
+                flex: 1;
+                background: linear-gradient(to bottom right, #004080, #0073e6);
+                color: white;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 50px 40px;
+                position: relative;
+            }
+            .right-panel {
+                flex: 1;
+                background-color: #fefefe;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 50px;
+            }
+            .login-box {
+                background-color: #ffffff;
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 400px;
+            }
+            .login-box h2 {
+                margin-bottom: 20px;
+                text-align: center;
+                color: #003366;
+            }
+            .captcha-box {
+                background-color: #fff7e6;
+                padding: 10px 20px;
+                font-weight: bold;
+                font-size: 18px;
+                letter-spacing: 5px;
+                color: #e09000;
+                border-radius: 8px;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+            .small-text {
+                font-size: 13px;
+                margin-top: 10px;
+                text-align: center;
+                color: #444;
+            }
+            .small-text a {
+                color: #0073e6;
+                text-decoration: none;
+                font-weight: 500;
+            }
 
-# Layout Container
-st.markdown('<div class="container">', unsafe_allow_html=True)
+            /* ANIMASI KAPAL */
+            .ocean {
+                height: 120px;
+                width: 100%;
+                background: #aee4f6;
+                overflow: hidden;
+                position: relative;
+                border-radius: 12px;
+                margin-bottom: 30px;
+            }
+            .wave {
+                background: url('https://i.imgur.com/axQ9wDY.png') repeat-x;
+                position: absolute;
+                top: 70px;
+                width: 200%;
+                height: 100px;
+                animation: wave 10s linear infinite;
+                opacity: 0.8;
+            }
+            @keyframes wave {
+                0% { background-position-x: 0; }
+                100% { background-position-x: -1600px; }
+            }
+            .ship {
+                position: absolute;
+                top: -20px;
+                left: 0;
+                width: 300px;
+                animation: sail 10s linear infinite;
+            }
+            @keyframes sail {
+                0% { left: -150px; }
+                100% { left: 100%; }
+            }
 
-# Kiri
-st.markdown('''
-    <div class="left-panel">
-        <h1>SMARTSHIP</h1>
-        <h2>EVALUASI KAPAL</h2>
-        <p>Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.</p>
-    </div>
-''', unsafe_allow_html=True)
+            .intro-text {
+                font-size: 17px;
+                color: #d6ecff;
+                line-height: 1.6;
+                margin-top: 20px;
+                max-width: 500px;
+            }
 
-# Kanan
-with st.container():
-    st.markdown('<div class="right-panel">', unsafe_allow_html=True)
-    st.markdown('<h2 style="color:#0b2447;">Login to Dashboard</h2>', unsafe_allow_html=True)
-    
+            .left-title {
+                font-size: 36px;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #ffffff;
+            }
+            .left-subtitle {
+                font-size: 22px;
+                font-weight: 500;
+                margin-bottom: 20px;
+                color: #cce4ff;
+            }
+
+        </style>
+    """, unsafe_allow_html=True)
+
+    # Struktur halaman
+    st.markdown('<div class="container">', unsafe_allow_html=True)
+
+    # LEFT PANEL
+    st.markdown(f"""
+        <div class="left-panel">
+            <div>
+                <div class="ocean">
+                    <div class="wave"></div>
+                    <img src="https://imgur.com/OyBhpR9.png" class="ship" />
+                </div>
+                <div class="left-title">SMARTSHIP</div>
+                <div class="left-subtitle">EVALUASI KAPAL</div>
+                <p class="intro-text">
+                    Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.
+                </p>
+            </div>
+        </div>
+    """, unsafe_allow_html=True)
+
+    # RIGHT PANEL (LOGIN FORM)
+    st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
+    st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
+
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-    
-    st.markdown(f'<div class="captcha-box">{st.session_state.captcha}</div>', unsafe_allow_html=True)
-    captcha_input = st.text_input("Captcha")
+
+    captcha = generate_captcha()
+    st.markdown(f'<div class="captcha-box">{captcha}</div>', unsafe_allow_html=True)
+    user_captcha = st.text_input("Captcha")
 
     if st.button("Sign In"):
-        if captcha_input == st.session_state.captcha:
-            st.success(f"Selamat datang, {username}!")
+        if username == "admin" and password == "123" and user_captcha.replace(" ", "") == captcha.replace(" ", ""):
             st.session_state.login = True
+            st.rerun()
         else:
-            st.error("Captcha salah. Silakan coba lagi.")
-            st.session_state.captcha = generate_captcha()
+            st.error("Login gagal: Username / Password / Captcha salah.")
 
-    st.markdown('''
-        <div class="bottom-links">
-            Don’t have an account? <a href="#">Sign Up Here</a><br>
-            Forgot Password? <a href="#">Click Here</a>
-        </div>
-    </div>
-    ''', unsafe_allow_html=True)
+    st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
+    st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-# Tutup container
-st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup container
+    st.stop()
 
-
-# Setelah login berhasil
+# Jika berhasil login
 st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
 st.markdown("📊 Di sini akan muncul dashboard utama...")
 
