@@ -167,7 +167,7 @@ if not st.session_state.login:
             }
             .ship {
                 position: absolute;
-                top: 40px;
+                top: 20px;
                 left: 0;
                 width: 300px;
                 animation: sail 5s linear infinite;
