@@ -53,13 +53,15 @@ import random
 
 # Fungsi Captcha
 def generate_captcha():
-    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z'], 5))
+    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z', 'z'], 6))
 
 # Inisialisasi sesi login
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
+    st.set_page_config(page_title="SmartShip Login", layout="wide")
+
     st.markdown("""
         <style>
             .container {
@@ -67,21 +69,20 @@ if not st.session_state.login:
                 height: 100vh;
                 overflow: hidden;
                 font-family: 'Segoe UI', sans-serif;
-                background-color: #e9f4fb;
             }
             .left-panel {
                 flex: 1;
-                background: linear-gradient(to bottom right, #004080, #0073e6);
+                background: linear-gradient(to bottom right, #002b50, #003d73);
                 color: white;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
-                padding: 50px 40px;
+                justify-content: center;
+                padding: 60px 40px;
                 position: relative;
             }
             .right-panel {
                 flex: 1;
-                background-color: #fefefe;
+                background-color: #f8fcff;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -96,24 +97,25 @@ if not st.session_state.login:
                 max-width: 400px;
             }
             .login-box h2 {
-                margin-bottom: 20px;
+                margin-bottom: 25px;
                 text-align: center;
                 color: #003366;
+                font-size: 26px;
             }
             .captcha-box {
-                background-color: #fff7e6;
-                padding: 10px 20px;
+                background-color: #fff0d6;
+                padding: 12px 20px;
                 font-weight: bold;
-                font-size: 18px;
+                font-size: 20px;
                 letter-spacing: 5px;
-                color: #e09000;
+                color: #cc7a00;
                 border-radius: 8px;
-                margin-bottom: 10px;
+                margin: 10px 0;
                 display: inline-block;
             }
             .small-text {
                 font-size: 13px;
-                margin-top: 10px;
+                margin-top: 15px;
                 text-align: center;
                 color: #444;
             }
@@ -122,8 +124,25 @@ if not st.session_state.login:
                 text-decoration: none;
                 font-weight: 500;
             }
+            .left-title {
+                font-size: 38px;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #ffffff;
+            }
+            .left-subtitle {
+                font-size: 24px;
+                font-weight: 500;
+                margin-bottom: 25px;
+                color: #cce4ff;
+            }
+            .intro-text {
+                font-size: 17px;
+                color: #d6ecff;
+                line-height: 1.6;
+                max-width: 480px;
+            }
 
-            /* ANIMASI KAPAL */
             .ocean {
                 height: 120px;
                 width: 100%;
@@ -151,42 +170,20 @@ if not st.session_state.login:
                 top: -20px;
                 left: 0;
                 width: 300px;
-                animation: sail 10s linear infinite;
+                animation: sail 12s linear infinite;
             }
             @keyframes sail {
                 0% { left: -150px; }
                 100% { left: 100%; }
             }
-
-            .intro-text {
-                font-size: 17px;
-                color: #d6ecff;
-                line-height: 1.6;
-                margin-top: 20px;
-                max-width: 500px;
-            }
-
-            .left-title {
-                font-size: 36px;
-                font-weight: bold;
-                margin-bottom: 5px;
-                color: #ffffff;
-            }
-            .left-subtitle {
-                font-size: 22px;
-                font-weight: 500;
-                margin-bottom: 20px;
-                color: #cce4ff;
-            }
-
         </style>
     """, unsafe_allow_html=True)
 
-    # Struktur halaman
+    # Struktur halaman utama
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # LEFT PANEL
-    st.markdown(f"""
+    # PANEL KIRI
+    st.markdown("""
         <div class="left-panel">
             <div>
                 <div class="ocean">
@@ -196,13 +193,13 @@ if not st.session_state.login:
                 <div class="left-title">SMARTSHIP</div>
                 <div class="left-subtitle">EVALUASI KAPAL</div>
                 <p class="intro-text">
-                    Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini untuk performa kapal Anda.
+                    Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini unt tuk performa kapal Anda.
                 </p>
             </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # RIGHT PANEL (LOGIN FORM)
+    # PANEL KANAN (LOGIN)
     st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
     st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
@@ -223,10 +220,10 @@ if not st.session_state.login:
     st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
     st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup container
+    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup struktur
     st.stop()
 
-# Jika berhasil login
+# Setelah login berhasil
 st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
 st.markdown("📊 Di sini akan muncul dashboard utama...")
 
