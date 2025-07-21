@@ -51,16 +51,15 @@ import random
 import streamlit as st
 import random
 
-# Fungsi untuk membuat captcha acak
+# Fungsi Captcha
 def generate_captcha():
     return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z'], 5))
 
-# Inisialisasi session login
+# Inisialisasi sesi login
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
-    # CSS untuk styling modern
     st.markdown("""
         <style>
             .container {
@@ -142,7 +141,7 @@ if not st.session_state.login:
                 font-weight: 500;
             }
 
-            /* Animasi kapal */
+            /* ANIMASI KAPAL */
             .ocean {
                 height: 120px;
                 width: 100%;
@@ -168,10 +167,10 @@ if not st.session_state.login:
             }
             .ship {
                 position: absolute;
-                top: 20px;
+                top: 10px;
                 left: 0;
                 width: 100px;
-                animation: sail 20s linear infinite;
+                animation: sail 25s linear infinite;
             }
             @keyframes sail {
                 0% { left: -150px; }
@@ -180,26 +179,24 @@ if not st.session_state.login:
         </style>
     """, unsafe_allow_html=True)
 
-    # Container layout utama
+    # Struktur halaman
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Panel kiri (judul, deskripsi, animasi)
     st.markdown(f"""
         <div class="left-panel">
             <div class="ocean">
                 <div class="wave"></div>
-                <img src="https://i.imgur.com/qvRiXgs.jpeg" class="ship" />
+                <img src="https://imgur.com/OyBhpR9.png" class="ship" />
             </div>
             <h1>SmartShip Evaluation System</h1>
             <p>
                 Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar,
                 dan kepatuhan operasional dari satu dashboard terintegrasi.
             </p>
-            <img src="https://i.imgur.com/qvRiXgs.jpeg" class="main-img" alt="kapal"/>
+            <img src="https://imgur.com/OyBhpR9.png" class="main-img" alt="kapal"/>
         </div>
     """, unsafe_allow_html=True)
 
-    # Panel kanan (form login)
     st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
     st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
@@ -223,7 +220,7 @@ if not st.session_state.login:
     st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup container
     st.stop()
 
-# Jika login berhasil
+# Jika berhasil login
 st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
 st.markdown("📊 Di sini akan muncul dashboard utama...")
 
