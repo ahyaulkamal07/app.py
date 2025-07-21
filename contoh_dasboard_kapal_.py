@@ -158,7 +158,7 @@ if not st.session_state.login:
                 top: 70px;
                 width: 200%;
                 height: 100px;
-                animation: wave 15s linear infinite;
+                animation: wave 5s linear infinite;
                 opacity: 0.8;
             }
             @keyframes wave {
