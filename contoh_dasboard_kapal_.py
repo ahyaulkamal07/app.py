@@ -94,7 +94,7 @@ if not st.session_state.login:
     st.markdown("""
         <div class="carousel">
             <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2" />
-            <img src="https://postimg.cc/vDBmhkw7/53ccbccd" />
+            <img src="https://imgur.com/a/vYaCkc8" />
             <img src="https://images.unsplash.com/photo-1618925693387-6ef13eec63f4" />
         </div>
     """, unsafe_allow_html=True)
