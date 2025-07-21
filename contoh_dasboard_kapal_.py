@@ -115,9 +115,6 @@ if not st.session_state.login:
 
     st.markdown('</div></div>', unsafe_allow_html=True)
     st.stop()
-if page == "Beranda":
-    st.image("https://images.unsplash.com/photo-1505842465776-3d90f6160b9c", use_column_width=True)
-    st.markdown("### 👋 Selamat Datang di Dashboard Monitoring Barang Kapal")
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
