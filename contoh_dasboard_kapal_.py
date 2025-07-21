@@ -192,8 +192,8 @@ if not st.session_state.login:
     st.stop()
 
 # Jika login berhasil
-st.success("✅ Login berhasil! Selamat datang di SmartShip Dashboard.")
-st.markdown("🔍 Di sini kamu bisa mulai memantau performa kapal dengan visualisasi data yang interaktif.")
+st.success("\u2705 Login berhasil! Selamat datang di SmartShip Dashboard.")
+st.markdown("\ud83d\udd0d Di sini kamu bisa mulai memantau performa kapal dengan visualisasi data yang interaktif.")
 
 
 # ------------------ DASHBOARD ------------------
