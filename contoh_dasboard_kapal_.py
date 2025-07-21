@@ -154,7 +154,7 @@ if not st.session_state.login:
                 border-radius: 12px;
             }
             .wave {
-                background: url('https://imgur.com/OyBhpR9') repeat-x;
+                background: url('https://i.imgur.com/axQ9wDY.png') repeat-x;
                 position: absolute;
                 top: 70px;
                 width: 200%;
