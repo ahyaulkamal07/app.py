@@ -49,170 +49,274 @@ import streamlit as st
 import random
 
 import streamlit as st
-# Pustaka 'random' tidak lagi diperlukan karena CAPTCHA dibuat statis sesuai gambar
-# import random
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - [Nama Perusahaan Anda]</title>
+    <style>
+        /* Import Font dari Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
-# Fungsi Captcha disesuaikan agar sesuai dengan gambar
-def generate_captcha():
-    # Mengembalikan nilai statis seperti yang terlihat di gambar
-    return 'A B 3 X 9 Z'
+        /* --- CSS Reset & Global Style --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-# Inisialisasi sesi login
-if 'login' not in st.session_state:
-    st.session_state.login = False
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-if not st.session_state.login:
-    st.markdown("""
-        <style>
-            /* Menghapus margin default dari Streamlit */
-            .main .block-container {
-                padding-top: 0rem;
-                padding-bottom: 0rem;
-            }
-            .container {
-                display: flex;
-                height: 100vh;
-                overflow: hidden;
-                font-family: 'Segoe UI', sans-serif;
-                background-color: #f0f2f5;
-            }
+        /* --- Main Container --- */
+        .login-container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 1200px;
+            max-height: 700px;
+            background: #fff;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        /* --- Panel Kiri (Visual) --- */
+        .left-panel {
+            flex: 1;
+            background-image: url('https://images.unsplash.com/photo-1577561145218-e794399d5f85?q=80&w=1887&auto=format&fit=crop'); /* <-- GANTI GAMBAR DI SINI */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 50px;
+            color: #fff;
+        }
+        
+        /* Overlay gelap agar teks terbaca */
+        .left-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 35, 75, 0.8), rgba(0, 35, 75, 0.2));
+        }
+
+        .left-panel .welcome-text {
+            position: relative; /* Agar di atas overlay */
+            z-index: 1;
+        }
+
+        .left-panel h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .left-panel p {
+            font-size: 1rem;
+            max-width: 400px;
+        }
+
+        /* --- Panel Kanan (Formulir) --- */
+        .right-panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .login-form {
+            width: 100%;
+            max-width: 380px;
+            text-align: center;
+        }
+        
+        .login-form .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .login-form h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .login-form .subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+        
+        /* Styling untuk input field dan floating label */
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f9f9f9;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #0056b3; /* Warna biru korporat */
+        }
+        
+        .form-label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            color: #999;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        /* Efek floating label saat input di-fokus atau diisi */
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: 0px;
+            left: 10px;
+            font-size: 0.75rem;
+            color: #0056b3;
+            background: #fff;
+            padding: 0 5px;
+            transform: translateY(-50%);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #0056b3; /* Warna biru korporat */
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-button:hover {
+            background: #003d82; /* Warna biru lebih gelap saat hover */
+        }
+        
+        .forgot-password {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .forgot-password a {
+            color: #0056b3;
+            text-decoration: none;
+            transition: text-decoration 0.3s;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- Media Query untuk Tampilan Mobile --- */
+        @media (max-width: 800px) {
             .left-panel {
-                flex: 1;
-                /* Menggunakan warna biru tua solid seperti di gambar */
-                background-color: #0d253f; 
-                color: white;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center; /* Memusatkan konten */
-                padding: 50px;
-                text-align: center; /* Memusatkan teks */
-            }
-            .left-panel h1 {
-                font-size: 48px; /* Ukuran font lebih besar */
-                font-weight: bold;
-                margin-bottom: 5px; /* Mengurangi jarak bawah */
-                color: #ffffff;
-                line-height: 1.2;
-                letter-spacing: 2px;
-            }
-            .left-panel h2 {
-                font-size: 24px;
-                font-weight: 300; /* Font lebih tipis */
-                margin-bottom: 20px;
-                color: #ffffff;
-            }
-            .left-panel p {
-                font-size: 16px;
-                color: #d6ecff;
-                line-height: 1.6;
-                max-width: 450px; /* Sedikit lebih sempit */
-                margin-bottom: 40px; /* Menambah jarak ke gambar */
-            }
-            .left-panel img.main-img {
-                /* Menggunakan ilustrasi kapal dari gambar */
-                width: 70%; 
-                max-width: 300px;
-                margin-top: 20px;
+                display: none; /* Sembunyikan panel gambar di mobile */
             }
             .right-panel {
-                flex: 1;
-                background-color: #ffffff;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                padding: 50px;
+                flex-basis: 100%;
             }
-            .login-box {
-                background-color: #ffffff;
-                padding: 40px;
-                width: 100%;
-                max-width: 400px;
+            .login-container {
+                border-radius: 0;
+                box-shadow: none;
+                max-height: 100%;
             }
-            .login-box h2 {
-                margin-bottom: 25px;
-                text-align: left; /* Teks ke kiri */
-                font-size: 28px;
-                color: #0d253f; /* Warna biru tua */
-                font-weight: 600;
-            }
-            .captcha-box {
-                background-color: #fffbe6; /* Kuning pucat */
-                padding: 12px 20px;
-                font-weight: bold;
-                font-size: 20px;
-                letter-spacing: 8px; /* Jarak huruf lebih besar */
-                color: #d4ac0d; /* Warna gold/kuning tua */
-                border-radius: 8px;
-                margin-bottom: 15px;
-                display: block; /* Agar lebar penuh */
-                text-align: center;
-                border: 1px solid #f7eac3;
-            }
-            .small-text {
-                font-size: 14px;
-                margin-top: 15px;
-                text-align: left; /* Teks ke kiri */
-                color: #555;
-            }
-            .small-text a {
-                color: #0073e6;
-                text-decoration: none;
-                font-weight: 600;
-            }
-            /* Menghilangkan animasi kapal yang tidak ada di gambar */
-            .ocean, .ship, .wave {
-                display: none;
-            }
-        </style>
-    """, unsafe_allow_html=True)
+        }
 
-    # Struktur halaman
-    st.markdown('<div class="container">', unsafe_allow_html=True)
-
-    # Panel Kiri - Konten disesuaikan dengan gambar
-    st.markdown("""
-        <div class="left-panel">
-            <h1>SMARTSHIP</h1>
-            <h2>EVALUASI KAPAL</h2>
-            <p>
-                Selamat datang di platform evaluasi armada kapal secara digital yang memberikan informasi akurat dan terkini unt tuk performa kapal Anda.
-            </p>
-            <img src="https://i.imgur.com/gK6aJIc.png" class="main-img" alt="Ilustrasi Kapal"/>
-        </div>
-    """, unsafe_allow_html=True)
+    </style>
+</head>
+<body>
     
-    # Panel Kanan
-    col1, col2 = st.columns([1,1])
-    with col2:
-        st.markdown('<div class="login-box">', unsafe_allow_html=True)
-        st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
+    <div class="login-container">
+        <div class="left-panel">
+            <div class="welcome-text">
+                <h1>Gerbang Digital Anda</h1>
+                <p>Mengintegrasikan layanan logistik dan maritim terdepan untuk efisiensi bisnis Anda.</p>
+            </div>
+        </div>
 
-        username = st.text_input("Username", label_visibility="collapsed", placeholder="Username")
-        password = st.text_input("Password", type="password", label_visibility="collapsed", placeholder="Password")
+        <div class="right-panel">
+            <form class="login-form" action="#" method="POST">
+                
+                <img src="https://pelindo.co.id/themes/pelindo/assets/images/logo/logo-pelindo-white.png" alt="Logo Perusahaan" class="logo" style="filter: invert(25%) sepia(50%) saturate(2500%) hue-rotate(190deg);">
 
-        # Menggunakan fungsi captcha yang sudah disesuaikan
-        captcha_text = generate_captcha()
-        st.markdown(f'<div class="captcha-box">{captcha_text}</div>', unsafe_allow_html=True)
-        user_captcha = st.text_input("Captcha", label_visibility="collapsed", placeholder="Captcha")
+                <h2>Selamat Datang</h2>
+                <p class="subtitle">Silakan masuk ke akun Anda</p>
+                
+                <div class="form-group">
+                    <input type="text" id="username" class="form-input" placeholder=" " required>
+                    <label for="username" class="form-label">Username</label>
+                </div>
 
-        if st.button("Sign In", use_container_width=True):
-            # Logika login disesuaikan dengan captcha statis
-            # .replace(" ", "") untuk menghapus spasi dari input dan teks captcha
-            if username == "admin" and password == "123" and user_captcha.replace(" ", "").upper() == captcha_text.replace(" ", ""):
-                st.session_state.login = True
-                st.rerun()
-            else:
-                st.error("Login gagal: Username / Password / Captcha salah.")
+                <div class="form-group">
+                    <input type="password" id="password" class="form-input" placeholder=" " required>
+                    <label for="password" class="form-label">Password</label>
+                </div>
+                
+                <button type="submit" class="login-button">Login</button>
 
-        st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
-        st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
+                <div class="forgot-password">
+                    <a href="#">Lupa Password?</a>
+                </div>
 
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-    st.markdown('</div>', unsafe_allow_html=True) # Penutup container
-    st.stop()
+            </form>
+        </div>
+    </div>
 
+    <script>
+        // Sedikit Javascript untuk mencegah form submit (hanya untuk demo)
+        const form = document.querySelector('.login-form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah halaman reload
+            
+            // Di sini Anda akan menambahkan logika validasi atau pengiriman data ke server
+            alert("Tombol Login ditekan! (Aksi default dicegah untuk demo)");
+
+            // Contoh: Mengambil nilai input
+            const username = document.getElementById('username').value;
+            console.log(`Percobaan login dengan username: ${username}`);
+            
+            // Setelah login berhasil, arahkan ke halaman dashboard
+            // window.location.href = '/dashboard.html';
+        });
+
+        // Trik agar floating label bekerja di semua browser, bahkan saat autocomplete
+        // dengan memastikan input tidak memiliki placeholder yang terlihat.
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.setAttribute('placeholder', ' ');
+        });
+    </script>
+
+</body>
+</html>
 
 # --- Halaman Setelah Berhasil Login ---
 st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
