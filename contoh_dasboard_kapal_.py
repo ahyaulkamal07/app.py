@@ -145,14 +145,14 @@ if not st.session_state.login:
     # Layout container
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Panel Kiri (judul dan gambar evaluasi kapal)
+    # Panel Kiri (judul dan gambar)
     st.markdown(f"""
         <div class="left-panel">
             <h1>SmartShip Evaluation System</h1>
             <p>
                 Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar, dan kepatuhan operasional dari satu dashboard terintegrasi.
             </p>
-            <img src="https://i.ibb.co/CMDdnrD/smart-ship.png" />
+            <img src="https://i.imgur.com/le5W3tY.jpeg" />
         </div>
     """, unsafe_allow_html=True)
 
@@ -177,10 +177,8 @@ if not st.session_state.login:
     st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
     st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-    # Penutup container
-    st.markdown('</div></div></div>', unsafe_allow_html=True)
+    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Penutup container
     st.stop()
-
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
