@@ -50,47 +50,56 @@ if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
+    # Ganti link ini dengan gambar latar belakang favoritmu (harus direct image URL)
+    background_url = "ttps://i.imgur.com/le5W3tY.jpeg"
+
     # CSS Styling
-    st.markdown("""
+    st.markdown(f"""
         <style>
-            .login-container {
+            .login-container {{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 height: 100vh;
-                background-color: #e6f0ff;
+                background-image: url('{background_url}');
+                background-size: cover;
+                background-position: center;
                 padding: 20px;
-            }
-            .login-box {
-                background-color: white;
+            }}
+            .login-box {{
+                background-color: rgba(255, 255, 255, 0.9);
                 padding: 40px;
                 border-radius: 15px;
                 box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
                 width: 400px;
-            }
-            .login-title {
+                text-align: center;
+            }}
+            .login-title {{
                 font-size: 28px;
                 font-weight: bold;
-                color: #1a75ff;
-                margin-bottom: 10px;
-                text-align: center;
-            }
-            .carousel {
+                color: #003366;
+                margin-bottom: 20px;
+            }}
+            .carousel {{
                 width: 100%;
                 height: 180px;
                 overflow-x: scroll;
                 white-space: nowrap;
-            }
-            .carousel img {
+                margin-bottom: 20px;
+            }}
+            .carousel img {{
                 height: 160px;
                 margin: 0 8px;
                 border-radius: 8px;
-            }
+            }}
         </style>
     """, unsafe_allow_html=True)
 
-    # Gambar Carousel
+    # Mulai login layout
+    st.markdown('<div class="login-container">', unsafe_allow_html=True)
+
+    # Carousel Gambar (scrollable)
     st.markdown("""
         <div class="carousel">
             <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2" />
@@ -100,7 +109,7 @@ if not st.session_state.login:
     """, unsafe_allow_html=True)
 
     # Kotak Login
-    st.markdown('<div class="login-container"><div class="login-box">', unsafe_allow_html=True)
+    st.markdown('<div class="login-box">', unsafe_allow_html=True)
     st.markdown('<div class="login-title">📦 Login Dashboard Kapal</div>', unsafe_allow_html=True)
 
     username = st.text_input("Username")
@@ -113,8 +122,11 @@ if not st.session_state.login:
         else:
             st.error("Username atau password salah.")
 
-    st.markdown('</div></div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)  # End login-box
+    st.markdown('</div>', unsafe_allow_html=True)  # End login-container
+
     st.stop()
+
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
