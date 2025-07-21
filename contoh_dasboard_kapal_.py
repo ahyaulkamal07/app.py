@@ -78,6 +78,7 @@ if not st.session_state.login:
                 flex-direction: column;
                 justify-content: center;
                 padding: 50px;
+                position: relative;
             }
             .left-panel h1 {
                 font-size: 38px;
@@ -91,7 +92,7 @@ if not st.session_state.login:
                 line-height: 1.5;
                 max-width: 500px;
             }
-            .left-panel img {
+            .left-panel img.main-img {
                 width: 80%;
                 margin-top: 40px;
                 border-radius: 15px;
@@ -140,21 +141,61 @@ if not st.session_state.login:
                 text-decoration: none;
                 font-weight: 500;
             }
+
+            /* Animasi kapal */
+            .ocean {
+                height: 120px;
+                width: 100%;
+                background: #aee4f6;
+                overflow: hidden;
+                position: absolute;
+                top: 10px;
+                left: 0;
+                border-radius: 12px;
+            }
+            .wave {
+                background: url('https://i.imgur.com/axQ9wDY.png') repeat-x;
+                position: absolute;
+                top: 70px;
+                width: 200%;
+                height: 50px;
+                animation: wave 10s linear infinite;
+                opacity: 0.8;
+            }
+            @keyframes wave {
+                0% { background-position-x: 0; }
+                100% { background-position-x: -1600px; }
+            }
+            .ship {
+                position: absolute;
+                top: 20px;
+                left: 0;
+                width: 100px;
+                animation: sail 20s linear infinite;
+            }
+            @keyframes sail {
+                0% { left: -150px; }
+                100% { left: 100%; }
+            }
         </style>
     """, unsafe_allow_html=True)
 
     # Container layout utama
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # Panel kiri (judul dan gambar kapal)
+    # Panel kiri (judul, deskripsi, animasi)
     st.markdown(f"""
         <div class="left-panel">
+            <div class="ocean">
+                <div class="wave"></div>
+                <img src="https://i.imgur.com/qvRiXgs.jpeg" class="ship" />
+            </div>
             <h1>SmartShip Evaluation System</h1>
             <p>
                 Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar,
                 dan kepatuhan operasional dari satu dashboard terintegrasi.
             </p>
-            <img src="https://i.imgur.com/qvRiXgs.jpeg" alt="kapal" />
+            <img src="https://i.imgur.com/qvRiXgs.jpeg" class="main-img" alt="kapal"/>
         </div>
     """, unsafe_allow_html=True)
 
@@ -183,9 +224,8 @@ if not st.session_state.login:
     st.stop()
 
 # Jika login berhasil
-st.success("Berhasil login! Selamat datang di SmartShip Dashboard.")
+st.success("✅ Berhasil login! Selamat datang di SmartShip Dashboard.")
 st.markdown("📊 Di sini akan muncul dashboard utama...")
-
 
 # ------------------ DASHBOARD ------------------
 st.sidebar.success("Login berhasil!")
