@@ -93,7 +93,7 @@ if not st.session_state.login:
     # Gambar Carousel
     st.markdown("""
         <div class="carousel">
-            <img src="https://www.bing.com/images/search?view=detailV2&insightstoken=bcid_ryHh0aR.07YIWlb7F7Jln9HrVzZv.....3Q*ccid_IeHRpH%2FT&form=ANCMS1&vsimg=https%3a%2f%2fwww.bing.com%2fimages%2fblob%3fbcid%3dSyHh0aR.07YIqxcxoNWLuD9SqbotqVTdP.E&iss=SBIUPLOADGET&selectedindex=0&id=-919821136&ccid=IeHRpH%2FT&exph=450&expw=600&vt=3&sim=11&cal=0&cab=1&cat=0&car=1" />
+            <img src="https://drive.google.com/file/d/1jHhOubORmoS7RayrHGVttO-fJ24F9x6E/view?usp=drive_link" />
             <img src="https://images.unsplash.com/photo-1583430174890-6c5c32a1cc9e" />
             <img src="https://images.unsplash.com/photo-1618925693387-6ef13eec63f4" />
         </div>
