@@ -169,7 +169,7 @@ if not st.session_state.login:
                 position: absolute;
                 top: 40px;
                 left: 0;
-                width: 100px;
+                width: 300px;
                 animation: sail 5s linear infinite;
             }
             @keyframes sail {
