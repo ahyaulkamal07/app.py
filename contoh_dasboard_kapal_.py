@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1HHLIQ98KHit4gQcvzUpSbor20-LfzC7G
 """
 
-import pandas as pd
+ import pandas as pd
 import streamlit as st
 import plotly.express as px
 from datetime import datetime, timedelta
@@ -41,6 +41,42 @@ df_dummy = pd.DataFrame(data, columns=[
 ])
 df_dummy.to_csv("dummy_kapal_data_100.csv", index=False)
 
+
+# ------------------ LOGIN ------------------
+if 'login' not in st.session_state:
+    st.session_state.login = False
+
+if not st.session_state.login:
+    st.image("https://yourimageurl.com/logo.png", width=200)
+    st.title("📦 Dashboard Monitoring Barang Kapal")
+    st.subheader("Pelabuhan Tanjung Priok")
+
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if username == "admin" and password == "123":
+            st.session_state.login = True
+        else:
+            st.error("Username atau Password salah!")
+
+    st.markdown("---")
+    st.caption("© 2025 Stance Works x Pelindo")
+    st.stop()
+
+# ------------------ DASHBOARD ------------------
+st.sidebar.success("Login berhasil!")
+st.sidebar.title("Navigasi")
+page = st.sidebar.radio("Pilih Halaman:", ["Beranda", "Monitoring", "Statistik", "Tentang"])
+
+if page == "Beranda":
+    st.image("https://yourimageurl.com/banner.png", use_column_width=True)
+    st.markdown("### 👋 Selamat Datang di Dashboard Monitoring Barang Kapal")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Kapal Hari Ini", "17")
+    col2.metric("Terminal Aktif", "Terminal 2")
+    col3.metric("Update Terakhir", "14:47 WIB")
+    
 # ---------- BACA DATA ----------
 @st.cache_data
 def load_data():
