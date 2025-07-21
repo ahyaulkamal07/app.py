@@ -48,15 +48,18 @@ import streamlit as st
 import streamlit as st
 import random
 
-# Simulasi Captcha (bukan sistem aman, hanya dummy visual)
+import streamlit as st
+import random
+
+# Generate dummy captcha
 def generate_captcha():
-    return ' '.join(random.sample(['F', '6', 'a', 'm', 'T'], 5))
+    return ' '.join(random.sample(['A', 'B', '3', 'X', '9', 'Z'], 5))
 
 if 'login' not in st.session_state:
     st.session_state.login = False
 
 if not st.session_state.login:
-    # CSS
+    # CSS styling modernized
     st.markdown("""
         <style>
             .container {
@@ -64,40 +67,50 @@ if not st.session_state.login:
                 height: 100vh;
                 overflow: hidden;
                 font-family: 'Segoe UI', sans-serif;
+                background-color: #e9f4fb;
             }
             .left-panel {
                 flex: 1;
-                background-color: #1B6CC9;
+                background: linear-gradient(to bottom right, #004080, #0073e6);
                 color: white;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
-                align-items: center;
-                padding: 40px;
+                padding: 50px;
             }
             .left-panel h1 {
-                font-size: 40px;
-                font-weight: 700;
-                margin-bottom: 10px;
+                font-size: 38px;
+                font-weight: bold;
+                margin-bottom: 15px;
+                color: #ffffff;
             }
-            .left-panel h1 span {
-                color: #00E6E6;
+            .left-panel p {
+                font-size: 17px;
+                color: #d6ecff;
+                line-height: 1.5;
+                max-width: 500px;
+            }
+            .left-panel img {
+                width: 80%;
+                margin-top: 40px;
+                border-radius: 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             }
             .right-panel {
                 flex: 1;
-                background: #f7f9fc;
+                background-color: #fefefe;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                padding: 40px;
+                padding: 50px;
             }
             .login-box {
-                background-color: white;
+                background-color: #ffffff;
                 padding: 40px;
-                border-radius: 15px;
+                border-radius: 12px;
+                box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
                 width: 100%;
                 max-width: 400px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             }
             .login-box h2 {
                 margin-bottom: 20px;
@@ -119,34 +132,33 @@ if not st.session_state.login:
                 font-size: 13px;
                 margin-top: 10px;
                 text-align: center;
+                color: #444;
             }
             .small-text a {
-                color: #007BFF;
+                color: #0073e6;
                 text-decoration: none;
                 font-weight: 500;
-            }
-            .image-ship {
-                margin-top: 30px;
-                width: 80%;
-                max-width: 400px;
             }
         </style>
     """, unsafe_allow_html=True)
 
-    # Layout dua kolom custom pakai HTML
+    # Layout container
     st.markdown('<div class="container">', unsafe_allow_html=True)
 
-    # KIRI - Info dan Gambar
-    st.markdown('''
+    # Panel Kiri (judul dan gambar evaluasi kapal)
+    st.markdown(f"""
         <div class="left-panel">
-            <h1>Transforming Operation <span>Excellence</span></h1>
-            <img class="image-ship" src="https://i.ibb.co/0cV5rVq/ship.png" />
+            <h1>SmartShip Evaluation System</h1>
+            <p>
+                Pantau performa armada Anda secara real-time. Evaluasi efisiensi kapal, konsumsi bahan bakar, dan kepatuhan operasional dari satu dashboard terintegrasi.
+            </p>
+            <img src="https://i.ibb.co/CMDdnrD/smart-ship.png" />
         </div>
-    ''', unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-    # KANAN - Form login
+    # Panel Kanan (form login)
     st.markdown('<div class="right-panel"><div class="login-box">', unsafe_allow_html=True)
-    st.markdown('<h2>PHINNISI Login</h2>', unsafe_allow_html=True)
+    st.markdown('<h2>Login to Dashboard</h2>', unsafe_allow_html=True)
 
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
@@ -165,7 +177,8 @@ if not st.session_state.login:
     st.markdown('<div class="small-text">Don’t have an account? <a href="#">Sign Up Here</a></div>', unsafe_allow_html=True)
     st.markdown('<div class="small-text">Forgot Password? <a href="#">Click Here</a></div>', unsafe_allow_html=True)
 
-    st.markdown('</div></div></div>', unsafe_allow_html=True)  # Tutup login-box, right-panel, dan container
+    # Penutup container
+    st.markdown('</div></div></div>', unsafe_allow_html=True)
     st.stop()
 
 
