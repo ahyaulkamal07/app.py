@@ -42,41 +42,6 @@ df_dummy = pd.DataFrame(data, columns=[
 df_dummy.to_csv("dummy_kapal_data_100.csv", index=False)
 
 
-import streamlit as st
-import streamlit_authenticator as stauth
-import yaml
-from yaml.loader import SafeLoader
-
-# --------- CONFIG USERS ---------
-config = {
-    'credentials': {
-        'usernames': {
-            'admin': {
-                'name': 'Admin Pelabuhan',
-                'password': stauth.Hasher(['admin123']).generate()[0]
-            },
-            'user1': {
-                'name': 'Petugas 1',
-                'password': stauth.Hasher(['kapal2025']).generate()[0]
-            },
-        }
-    },
-    'cookie': {
-        'name': 'kapal_session',
-        'key': 'random_signature_key',
-        'expiry_days': 1
-    },
-    'preauthorized': {
-        'emails': []
-    }
-}
-
-authenticator = stauth.Authenticate(
-    config['credentials'],
-    config['cookie']['name'],
-    config['cookie']['key'],
-    config['cookie']['expiry_days']
-)
 
 # --------- LOGIN SECTION ---------
 name, authentication_status, username = authenticator.login("Login", "main")
