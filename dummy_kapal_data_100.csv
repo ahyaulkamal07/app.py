@@ -1,0 +1,101 @@
+Nama Kapal,Jenis Kapal,Tanggal Kedatangan,Durasi Sandar (jam),Terminal
+KM Laut Jaya,Kapal Penumpang,2025-07-21 22:17:00,4.4,Terminal 1
+KM Laut Jaya,Kapal Penumpang,2025-07-21 03:27:00,2.3,Terminal 1
+KM Pelita,Kapal Curah Kering,2025-07-20 16:38:00,2.3,Terminal 1
+KM Surya,Kapal Kontainer,2025-07-19 04:28:00,7.9,Terminal 1
+KM Samudra,Kapal Kontainer,2025-07-19 19:17:00,3.6,Terminal 2
+KM Laut Jaya,Kapal Penumpang,2025-07-20 00:06:00,5.6,Terminal 2
+KM Baruna,Kapal Curah Cair,2025-07-22 07:02:00,9.3,Terminal 3
+KM Laut Jaya,Kapal Kontainer,2025-07-18 10:35:00,4.9,Terminal 3
+KM Baruna,Kapal Curah Cair,2025-07-21 01:12:00,9.0,Terminal 1
+KM Pelita,Kapal Curah Cair,2025-07-18 10:54:00,4.3,Terminal 1
+KM Jayabaya,Kapal Curah Cair,2025-07-20 10:40:00,10.3,Terminal 1
+KM Armada,Kapal Curah Cair,2025-07-19 02:42:00,4.7,Terminal 3
+KM Laut Jaya,Kapal Curah Kering,2025-07-20 20:46:00,4.4,Terminal 2
+KM Jayabaya,Kapal Curah Cair,2025-07-22 22:40:00,8.9,Terminal 1
+KM Armada,Kapal Penumpang,2025-07-19 05:52:00,2.3,Terminal 2
+KM Jayabaya,Kapal Curah Cair,2025-07-18 08:13:00,11.1,Terminal 3
+KM Armada,Kapal Curah Kering,2025-07-21 11:31:00,6.0,Terminal 3
+KM Pelangi,Kapal Curah Kering,2025-07-19 09:08:00,4.5,Terminal 3
+KM Surya,Kapal Curah Cair,2025-07-21 23:37:00,6.3,Terminal 3
+KM Jayabaya,Kapal Curah Cair,2025-07-19 04:08:00,7.1,Terminal 1
+KM Nusantara,Kapal Penumpang,2025-07-18 19:40:00,3.6,Terminal 3
+KM Jayabaya,Kapal Penumpang,2025-07-20 01:24:00,8.0,Terminal 2
+KM Surya,Kapal Curah Cair,2025-07-20 22:55:00,11.4,Terminal 3
+KM Laut Jaya,Kapal Curah Cair,2025-07-22 02:41:00,5.4,Terminal 2
+KM Jayabaya,Kapal Curah Kering,2025-07-20 10:00:00,11.5,Terminal 3
+KM Bintang,Kapal Curah Kering,2025-07-20 16:58:00,3.1,Terminal 3
+KM Bintang,Kapal Curah Kering,2025-07-18 19:23:00,9.6,Terminal 3
+KM Surya,Kapal Penumpang,2025-07-21 04:20:00,6.9,Terminal 1
+KM Armada,Kapal Curah Cair,2025-07-19 06:03:00,4.4,Terminal 3
+KM Laut Jaya,Kapal Penumpang,2025-07-21 21:31:00,10.2,Terminal 3
+KM Samudra,Kapal Curah Kering,2025-07-21 12:30:00,11.5,Terminal 1
+KM Bintang,Kapal Kontainer,2025-07-19 03:59:00,7.4,Terminal 3
+KM Pelita,Kapal Curah Cair,2025-07-20 03:42:00,8.5,Terminal 2
+KM Surya,Kapal Kontainer,2025-07-18 15:15:00,4.2,Terminal 2
+KM Nusantara,Kapal Curah Kering,2025-07-21 03:14:00,2.1,Terminal 3
+KM Nusantara,Kapal Curah Kering,2025-07-18 08:57:00,2.3,Terminal 2
+KM Laut Jaya,Kapal Curah Kering,2025-07-19 11:42:00,6.9,Terminal 3
+KM Samudra,Kapal Kontainer,2025-07-19 07:50:00,6.7,Terminal 2
+KM Pelita,Kapal Penumpang,2025-07-18 12:42:00,6.3,Terminal 2
+KM Jayabaya,Kapal Kontainer,2025-07-22 14:46:00,2.5,Terminal 3
+KM Laut Jaya,Kapal Penumpang,2025-07-20 03:46:00,5.4,Terminal 1
+KM Pelita,Kapal Curah Kering,2025-07-19 00:34:00,6.5,Terminal 2
+KM Samudra,Kapal Curah Cair,2025-07-20 11:15:00,10.7,Terminal 1
+KM Pelangi,Kapal Penumpang,2025-07-18 06:41:00,12.0,Terminal 1
+KM Laut Jaya,Kapal Curah Kering,2025-07-18 21:26:00,6.9,Terminal 1
+KM Jayabaya,Kapal Penumpang,2025-07-18 21:24:00,2.0,Terminal 2
+KM Bintang,Kapal Kontainer,2025-07-19 12:27:00,9.0,Terminal 3
+KM Surya,Kapal Kontainer,2025-07-18 19:12:00,5.0,Terminal 1
+KM Baruna,Kapal Penumpang,2025-07-21 23:20:00,2.6,Terminal 3
+KM Pelangi,Kapal Curah Kering,2025-07-18 07:32:00,2.8,Terminal 1
+KM Laut Jaya,Kapal Penumpang,2025-07-21 14:55:00,4.4,Terminal 1
+KM Baruna,Kapal Curah Kering,2025-07-21 02:38:00,2.4,Terminal 1
+KM Jayabaya,Kapal Curah Cair,2025-07-22 23:16:00,4.0,Terminal 3
+KM Armada,Kapal Curah Kering,2025-07-19 09:25:00,3.3,Terminal 3
+KM Bintang,Kapal Kontainer,2025-07-19 16:59:00,9.5,Terminal 1
+KM Nusantara,Kapal Kontainer,2025-07-21 07:36:00,12.0,Terminal 1
+KM Surya,Kapal Curah Kering,2025-07-20 16:16:00,3.3,Terminal 2
+KM Laut Jaya,Kapal Curah Kering,2025-07-19 23:18:00,3.6,Terminal 3
+KM Bintang,Kapal Penumpang,2025-07-21 13:52:00,7.5,Terminal 3
+KM Laut Jaya,Kapal Curah Kering,2025-07-19 09:07:00,10.9,Terminal 3
+KM Surya,Kapal Curah Kering,2025-07-19 10:18:00,8.0,Terminal 3
+KM Armada,Kapal Curah Kering,2025-07-21 15:40:00,10.5,Terminal 3
+KM Pelangi,Kapal Curah Cair,2025-07-22 19:58:00,10.5,Terminal 1
+KM Jayabaya,Kapal Curah Cair,2025-07-18 05:00:00,5.3,Terminal 1
+KM Bintang,Kapal Curah Kering,2025-07-21 22:28:00,7.5,Terminal 2
+KM Surya,Kapal Penumpang,2025-07-18 14:04:00,11.5,Terminal 3
+KM Samudra,Kapal Penumpang,2025-07-22 10:23:00,7.8,Terminal 1
+KM Jayabaya,Kapal Curah Kering,2025-07-18 05:19:00,5.6,Terminal 1
+KM Armada,Kapal Curah Kering,2025-07-21 15:15:00,8.7,Terminal 2
+KM Surya,Kapal Kontainer,2025-07-21 07:47:00,3.5,Terminal 1
+KM Samudra,Kapal Curah Kering,2025-07-22 16:26:00,2.2,Terminal 3
+KM Armada,Kapal Kontainer,2025-07-22 06:42:00,10.6,Terminal 1
+KM Bintang,Kapal Curah Kering,2025-07-22 04:44:00,3.1,Terminal 1
+KM Pelangi,Kapal Curah Kering,2025-07-19 01:52:00,11.2,Terminal 2
+KM Bintang,Kapal Curah Kering,2025-07-19 04:01:00,8.6,Terminal 2
+KM Armada,Kapal Curah Cair,2025-07-22 14:04:00,11.7,Terminal 2
+KM Armada,Kapal Kontainer,2025-07-21 14:53:00,7.4,Terminal 1
+KM Laut Jaya,Kapal Curah Cair,2025-07-18 22:37:00,11.6,Terminal 2
+KM Nusantara,Kapal Penumpang,2025-07-21 04:27:00,5.5,Terminal 2
+KM Jayabaya,Kapal Penumpang,2025-07-20 01:57:00,7.8,Terminal 2
+KM Nusantara,Kapal Kontainer,2025-07-18 00:33:00,11.3,Terminal 3
+KM Pelita,Kapal Curah Cair,2025-07-20 07:04:00,11.5,Terminal 2
+KM Baruna,Kapal Curah Cair,2025-07-21 12:54:00,3.2,Terminal 2
+KM Surya,Kapal Curah Cair,2025-07-21 13:26:00,5.3,Terminal 3
+KM Bintang,Kapal Curah Kering,2025-07-19 00:26:00,8.6,Terminal 2
+KM Samudra,Kapal Curah Cair,2025-07-20 03:35:00,10.3,Terminal 2
+KM Bintang,Kapal Curah Kering,2025-07-20 07:50:00,7.8,Terminal 3
+KM Armada,Kapal Kontainer,2025-07-20 08:28:00,8.8,Terminal 3
+KM Pelangi,Kapal Curah Kering,2025-07-21 12:05:00,4.8,Terminal 3
+KM Baruna,Kapal Curah Cair,2025-07-18 11:52:00,11.5,Terminal 1
+KM Bintang,Kapal Curah Kering,2025-07-22 07:12:00,3.5,Terminal 1
+KM Pelita,Kapal Kontainer,2025-07-21 06:54:00,9.7,Terminal 2
+KM Jayabaya,Kapal Curah Kering,2025-07-21 19:44:00,5.8,Terminal 2
+KM Pelita,Kapal Curah Kering,2025-07-21 11:44:00,2.1,Terminal 1
+KM Jayabaya,Kapal Curah Kering,2025-07-18 22:51:00,11.6,Terminal 3
+KM Pelangi,Kapal Penumpang,2025-07-20 23:15:00,11.2,Terminal 1
+KM Pelangi,Kapal Curah Kering,2025-07-22 06:29:00,8.7,Terminal 3
+KM Baruna,Kapal Curah Cair,2025-07-22 00:57:00,6.4,Terminal 3
+KM Surya,Kapal Kontainer,2025-07-22 10:58:00,7.5,Terminal 1
+KM Pelangi,Kapal Kontainer,2025-07-19 09:48:00,4.5,Terminal 3
